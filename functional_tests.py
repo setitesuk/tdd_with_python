@@ -14,7 +14,7 @@ class NewVisitorTest(unittest.TestCase):
     def check_for_row_in_list_table( self, row_text ):
         table=self.browser.find_element_by_id( 'id_list_table' )
         rows = table.find_elements_by_tag_name( 'tr' )
-        self.assertIn( row.text, [ row.text for row in rows ] )
+        self.assertIn( row_text, [ row.text for row in rows ] )
 
     def test_can_start_a_list_and_retrieve_it_later(self):
         # Edith has heard abouta cool new online to-do app. She goes
@@ -53,7 +53,7 @@ class NewVisitorTest(unittest.TestCase):
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
         self.check_for_row_in_list_table( '1: Buy peacock feathers' )
-        self.check_for_row_in_list_table( '2: use peacock feathers to make a fly' )
+        self.check_for_row_in_list_table( '2: Use peacock feathers to make a fly' )
 
         # Edit wonders whether the site will remember her list. Then she sees
         # that the site has generated a unique URL for her -- there is some
