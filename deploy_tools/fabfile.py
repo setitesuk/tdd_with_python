@@ -4,7 +4,7 @@ import random
 
 REPO_URL = 'https://github.com/setitesuk/tdd_with_python'
 
-def deploy:
+def deploy():
     site_folder = '/home/%s/sites/%s' % ( env.user, env.host )
     source_folder = site_folder + '/source'
     _create_directory_structure_if_necessary( site_folder )
