@@ -16,7 +16,7 @@ eg, on Ubuntu:
 
 ## Nginx Virtual Host config
 
-* see nginx.templat.cong
+* see nginx.template.conf
 * replace SITENAME with, eg, staging.my-domain.com
 
 ## Upstart Job
@@ -25,7 +25,7 @@ eg, on Ubuntu:
 * replace SITENAME with, eg, staging.my-domain.com
 
 ## Folder structure:
-Assume we have a user account at /hom/username
+Assume we have a user account at /home/username
 
 /home/username
 |-- sites
@@ -35,3 +35,16 @@ Assume we have a user account at /hom/username
 				|-- static
 				|-- virtualenv
 
+## Manual Deploy
+git clone repo source
+virtualenv --python=python3 ../virtualenv
+../virtualenv/bin/pip install -r requirements.txt
+../virtualenv/bin/python3 manage.py migrate --noinput
+../virtualenv/bin/python3 manage.py collectstatic --noinput
+../virtualenv/bin/python3 manage.py runserver
+Ctrl-C
+sudo cp deploy_tools/nginx.template.conf /etc/nginx/sites-available/$SITENAME
+sudo ln -s /etc/nginx/sites-available/$SITENAME /etc/nginx/sites-enabled/$SITENAME
+sudo service nginx start
+sudo cp deploy_tools/gunicorn-upstart.template.conf /etc/init/gunicorn-$SITENAME.conf
+start gunicorn-$SITENAME
