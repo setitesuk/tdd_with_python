@@ -8,3 +8,4 @@ urlpatterns = patterns('',
     url(r'^new$', 'lists.views.new_list', name='new_list' ),
     # url(r'^admin/', include(admin.site.urls)),
 )
+
